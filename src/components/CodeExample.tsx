@@ -1,0 +1,40 @@
+import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
+import tsx from 'react-syntax-highlighter/dist/esm/languages/prism/tsx'
+import { oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism'
+import type { Lesson } from '../data/lessons'
+import styles from './LessonView.module.css'
+
+SyntaxHighlighter.registerLanguage('tsx', tsx)
+
+type CodeExampleProps = {
+  code: Lesson['code']
+}
+
+export function CodeExample({ code }: CodeExampleProps) {
+  return (
+    <section className={styles.codeSection}>
+      <h2>代码示例</h2>
+      <div className={styles.codeCard}>
+        <div className={styles.codeTitle}>
+          <span>{code.title}</span>
+          <small>{code.fileName}</small>
+        </div>
+        <SyntaxHighlighter
+          language="tsx"
+          style={oneLight}
+          customStyle={{
+            margin: 0,
+            background: 'transparent',
+            fontSize: 14,
+            lineHeight: 1.7,
+          }}
+          codeTagProps={{
+            style: { fontFamily: 'var(--mono)' },
+          }}
+        >
+          {code.source}
+        </SyntaxHighlighter>
+      </div>
+    </section>
+  )
+}
