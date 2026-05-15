@@ -1,43 +1,8 @@
 import type { Lesson } from './types'
 
-const derivedCode = `import { useMemo } from 'react'
-import { create } from 'zustand'
-
-type Todo = {
-  id: string
-  title: string
-  done: boolean
-}
-
-type TodoState = {
-  todos: Todo[]
-  toggleTodo: (id: string) => void
-}
-
-export const useTodoStore = create<TodoState>()((set) => ({
-  todos: [],
-  toggleTodo: (id) =>
-    set((state) => ({
-      todos: state.todos.map((todo) =>
-        todo.id === id ? { ...todo, done: !todo.done } : todo,
-      ),
-    })),
-}))
-
-export function TodoStats() {
-  const todos = useTodoStore((state) => state.todos)
-
-  const stats = useMemo(() => {
-    const done = todos.filter((todo) => todo.done).length
-    return { done, total: todos.length, active: todos.length - done }
-  }, [todos])
-
-  return <span>{stats.done} / {stats.total} completed</span>
-}`
-
 export const derivedLesson: Lesson = {
   id: 'derived',
-  number: '12',
+  number: '17',
   title: '派生数据',
   summary: '把计算放在 selector 或组件 memo 中，避免重复 state。',
   level: '实践',
@@ -64,11 +29,6 @@ export const derivedLesson: Lesson = {
       ],
     },
   ],
-  code: {
-    title: '从 Todo 列表计算统计信息',
-    fileName: 'src/features/todos/TodoStats.tsx',
-    source: derivedCode,
-  },
   review: [
     {
       question: '为什么 doneCount 不一定要放进 store？',

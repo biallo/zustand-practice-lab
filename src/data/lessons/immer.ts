@@ -1,45 +1,8 @@
 import type { Lesson } from './types'
 
-const immerCode = `import { create } from 'zustand'
-import { immer } from 'zustand/middleware/immer'
-
-type TreeNode = {
-  id: string
-  title: string
-  selected: boolean
-}
-
-type TreeState = {
-  nodes: TreeNode[]
-  selectNode: (id: string) => void
-  renameNode: (id: string, title: string) => void
-}
-
-export const useTreeStore = create<TreeState>()(
-  immer((set) => ({
-    nodes: [
-      { id: 'root', title: 'Root', selected: true },
-      { id: 'settings', title: 'Settings', selected: false },
-    ],
-    selectNode: (id) =>
-      set((state) => {
-        state.nodes.forEach((node) => {
-          node.selected = node.id === id
-        })
-      }),
-    renameNode: (id, title) =>
-      set((state) => {
-        const node = state.nodes.find((node) => node.id === id)
-        if (node) {
-          node.title = title
-        }
-      }),
-  })),
-)`
-
 export const immerLesson: Lesson = {
   id: 'immer',
-  number: '09',
+  number: '12',
   title: 'Immer 更新嵌套状态',
   summary: '在复杂对象更新里保持可读性，同时避免直接突变普通 state。',
   level: '进阶',
@@ -66,11 +29,6 @@ export const immerLesson: Lesson = {
       ],
     },
   ],
-  code: {
-    title: '用 Immer 简化树节点更新',
-    fileName: 'src/stores/useTreeStore.ts',
-    source: immerCode,
-  },
   review: [
     {
       question: 'Immer 适合什么类型的状态？',

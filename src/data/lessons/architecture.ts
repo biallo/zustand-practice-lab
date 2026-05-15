@@ -1,30 +1,8 @@
 import type { Lesson } from './types'
 
-const architectureCode = `src/
-  features/
-    cart/
-      store.ts
-      CartPanel.tsx
-      selectors.ts
-    session/
-      store.ts
-      authFetch.ts
-  stores/
-    useUiStore.ts
-
-// src/features/cart/store.ts
-export const useCartStore = create<CartState>()((set, get) => ({
-  items: [],
-  addItem: (item) => set((state) => ({ items: [...state.items, item] })),
-  clearCart: () => set({ items: [] }),
-}))
-
-// src/features/cart/selectors.ts
-export const selectCartCount = (state: CartState) => state.items.length`
-
 export const architectureLesson: Lesson = {
   id: 'architecture',
-  number: '14',
+  number: '21',
   title: '项目架构实践',
   summary: '决定 store 放在哪里、如何命名、如何控制增长。',
   level: '实践',
@@ -51,11 +29,6 @@ export const architectureLesson: Lesson = {
       ],
     },
   ],
-  code: {
-    title: '按 Feature 组织 Store',
-    fileName: 'src/features/cart/store.ts',
-    source: architectureCode,
-  },
   review: [
     {
       question: '什么时候 store 应该放在 feature 目录？',

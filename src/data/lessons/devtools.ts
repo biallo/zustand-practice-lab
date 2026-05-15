@@ -1,31 +1,8 @@
 import type { Lesson } from './types'
 
-const devtoolsCode = `import { create } from 'zustand'
-import { devtools } from 'zustand/middleware'
-
-type CounterState = {
-  count: number
-  increase: () => void
-  reset: () => void
-}
-
-export const useCounterStore = create<CounterState>()(
-  devtools(
-    (set) => ({
-      count: 0,
-      increase: () =>
-        set((state) => ({ count: state.count + 1 }), false, 'counter/increase'),
-      reset: () => set({ count: 0 }, false, 'counter/reset'),
-    }),
-    {
-      name: 'counter-store',
-    },
-  ),
-)`
-
 export const devtoolsLesson: Lesson = {
   id: 'devtools',
-  number: '08',
+  number: '11',
   title: 'Devtools 与调试',
   summary: '给状态变化命名，降低调试复杂度。',
   level: '进阶',
@@ -52,11 +29,6 @@ export const devtoolsLesson: Lesson = {
       ],
     },
   ],
-  code: {
-    title: '给状态变化命名',
-    fileName: 'src/stores/useCounterStore.ts',
-    source: devtoolsCode,
-  },
   review: [
     {
       question: 'devtools 主要解决什么问题？',

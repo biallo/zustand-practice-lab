@@ -1,47 +1,8 @@
 import type { Lesson } from './types'
 
-const asyncCode = `import { create } from 'zustand'
-
-type Todo = {
-  id: string
-  title: string
-  done: boolean
-}
-
-type TodoState = {
-  todos: Todo[]
-  loading: boolean
-  error: string | null
-  fetchTodos: () => Promise<void>
-}
-
-export const useTodoStore = create<TodoState>()((set) => ({
-  todos: [],
-  loading: false,
-  error: null,
-  fetchTodos: async () => {
-    set({ loading: true, error: null })
-
-    try {
-      const response = await fetch('/api/todos')
-      if (!response.ok) {
-        throw new Error('Failed to load todos')
-      }
-
-      const todos = (await response.json()) as Todo[]
-      set({ todos, loading: false })
-    } catch (error) {
-      set({
-        loading: false,
-        error: error instanceof Error ? error.message : 'Unknown error',
-      })
-    }
-  },
-}))`
-
 export const asyncActionsLesson: Lesson = {
   id: 'async',
-  number: '05',
+  number: '06',
   title: '异步 Action',
   summary: '在 store 内组织请求、加载状态和错误状态。',
   level: '入门',
@@ -68,11 +29,6 @@ export const asyncActionsLesson: Lesson = {
       ],
     },
   ],
-  code: {
-    title: '异步加载 Todo 列表',
-    fileName: 'src/stores/useTodoStore.ts',
-    source: asyncCode,
-  },
   review: [
     {
       question: 'Zustand 里的 action 可以是 async 函数吗？',

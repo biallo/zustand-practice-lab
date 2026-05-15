@@ -1,42 +1,8 @@
 import type { Lesson } from './types'
 
-const typescriptCode = `import { create } from 'zustand'
-
-type Filter = 'all' | 'active' | 'done'
-
-type Task = {
-  id: string
-  title: string
-  done: boolean
-}
-
-type TaskState = {
-  tasks: Task[]
-  filter: Filter
-  addTask: (title: string) => void
-  setFilter: (filter: Filter) => void
-  toggleTask: (id: string) => void
-}
-
-export const useTaskStore = create<TaskState>()((set) => ({
-  tasks: [],
-  filter: 'all',
-  addTask: (title) =>
-    set((state) => ({
-      tasks: [...state.tasks, { id: crypto.randomUUID(), title, done: false }],
-    })),
-  setFilter: (filter) => set({ filter }),
-  toggleTask: (id) =>
-    set((state) => ({
-      tasks: state.tasks.map((task) =>
-        task.id === id ? { ...task, done: !task.done } : task,
-      ),
-    })),
-}))`
-
 export const typescriptLesson: Lesson = {
   id: 'typescript',
-  number: '07',
+  number: '10',
   title: 'TypeScript 模型',
   summary: '为 state、action 和 selector 建立清晰类型。',
   level: '进阶',
@@ -63,11 +29,6 @@ export const typescriptLesson: Lesson = {
       ],
     },
   ],
-  code: {
-    title: '带联合类型的任务 Store',
-    fileName: 'src/stores/useTaskStore.ts',
-    source: typescriptCode,
-  },
   review: [
     {
       question: '为什么要先定义 TaskState？',

@@ -1,39 +1,8 @@
 import type { Lesson } from './types'
 
-const formsCode = `import { create } from 'zustand'
-
-type DraftState = {
-  title: string
-  body: string
-  dirty: boolean
-  updateTitle: (title: string) => void
-  updateBody: (body: string) => void
-  resetDraft: () => void
-}
-
-const initialDraft = {
-  title: '',
-  body: '',
-  dirty: false,
-}
-
-export const useDraftStore = create<DraftState>()((set) => ({
-  ...initialDraft,
-  updateTitle: (title) => set({ title, dirty: true }),
-  updateBody: (body) => set({ body, dirty: true }),
-  resetDraft: () => set(initialDraft),
-}))
-
-export function DraftTitleInput() {
-  const title = useDraftStore((state) => state.title)
-  const updateTitle = useDraftStore((state) => state.updateTitle)
-
-  return <input value={title} onChange={(event) => updateTitle(event.target.value)} />
-}`
-
 export const formsLesson: Lesson = {
   id: 'forms',
-  number: '11',
+  number: '16',
   title: '表单状态',
   summary: '处理临时输入、保存状态和重置流程。',
   level: '实践',
@@ -60,11 +29,6 @@ export const formsLesson: Lesson = {
       ],
     },
   ],
-  code: {
-    title: '文章草稿 Store',
-    fileName: 'src/stores/useDraftStore.ts',
-    source: formsCode,
-  },
   review: [
     {
       question: '所有表单字段都应该放进 Zustand 吗？',

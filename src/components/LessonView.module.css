@@ -122,19 +122,10 @@
 }
 
 .codeTitle {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
   padding: 12px 16px;
   border-bottom: 1px solid var(--line);
   color: var(--text-strong);
   font-weight: 700;
-}
-
-.codeTitle small {
-  color: var(--text-soft);
-  font-size: 13px;
 }
 
 .reviewGrid {
@@ -221,11 +212,5 @@
 
   .tab {
     padding: 0 12px;
-  }
-
-  .codeTitle {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 2px;
   }
 }

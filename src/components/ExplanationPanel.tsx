@@ -18,7 +18,7 @@ export function ExplanationPanel({ lesson }: ExplanationPanelProps) {
         </section>
       ))}
 
-      <CodeExample code={lesson.code} />
+      {lesson.code ? <CodeExample code={lesson.code} /> : null}
     </article>
   )
 }

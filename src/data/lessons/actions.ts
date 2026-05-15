@@ -1,44 +1,8 @@
 import type { Lesson } from './types'
 
-const actionCode = `import { create } from 'zustand'
-
-type CartItem = {
-  id: string
-  name: string
-  quantity: number
-}
-
-type CartState = {
-  items: CartItem[]
-  addItem: (item: Omit<CartItem, 'quantity'>) => void
-  removeItem: (id: string) => void
-  clearCart: () => void
-}
-
-export const useCartStore = create<CartState>()((set) => ({
-  items: [],
-  addItem: (item) =>
-    set((state) => {
-      const existing = state.items.find((entry) => entry.id === item.id)
-
-      if (existing) {
-        return {
-          items: state.items.map((entry) =>
-            entry.id === item.id ? { ...entry, quantity: entry.quantity + 1 } : entry,
-          ),
-        }
-      }
-
-      return { items: [...state.items, { ...item, quantity: 1 }] }
-    }),
-  removeItem: (id) =>
-    set((state) => ({ items: state.items.filter((item) => item.id !== id) })),
-  clearCart: () => set({ items: [] }),
-}))`
-
 export const actionsLesson: Lesson = {
   id: 'actions',
-  number: '03',
+  number: '04',
   title: 'Action 设计',
   summary: '把状态更新收敛成可读、可测试的业务动作。',
   level: '入门',
@@ -65,11 +29,6 @@ export const actionsLesson: Lesson = {
       ],
     },
   ],
-  code: {
-    title: '把购物车规则收敛到 Action',
-    fileName: 'src/stores/useCartStore.ts',
-    source: actionCode,
-  },
   review: [
     {
       question: 'action 名称应该描述实现还是业务意图？',

@@ -1,37 +1,8 @@
 import type { Lesson } from './types'
 
-const testingCode = `import { create } from 'zustand'
-
-type CounterState = {
-  count: number
-  increase: () => void
-  reset: () => void
-}
-
-export const useCounterStore = create<CounterState>()((set) => ({
-  count: 0,
-  increase: () => set((state) => ({ count: state.count + 1 })),
-  reset: () => set({ count: 0 }),
-}))
-
-beforeEach(() => {
-  useCounterStore.setState({ count: 0 })
-})
-
-it('increases count', () => {
-  useCounterStore.getState().increase()
-  expect(useCounterStore.getState().count).toBe(1)
-})
-
-it('resets count', () => {
-  useCounterStore.setState({ count: 5 })
-  useCounterStore.getState().reset()
-  expect(useCounterStore.getState().count).toBe(0)
-})`
-
 export const testingLesson: Lesson = {
   id: 'testing',
-  number: '13',
+  number: '19',
   title: 'Store 测试',
   summary: '直接调用 store API 测试 action 行为。',
   level: '实践',
@@ -58,11 +29,6 @@ export const testingLesson: Lesson = {
       ],
     },
   ],
-  code: {
-    title: '直接测试 Counter Store',
-    fileName: 'src/stores/useCounterStore.test.ts',
-    source: testingCode,
-  },
   review: [
     {
       question: '为什么测试 store 不一定需要渲染 React？',

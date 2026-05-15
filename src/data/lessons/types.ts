@@ -1,5 +1,10 @@
 export type LessonLevel = '入门' | '进阶' | '实践'
 
+export type LessonCode = {
+  title: string
+  snippet: string
+}
+
 export type Lesson = {
   id: string
   number: string
@@ -10,11 +15,7 @@ export type Lesson = {
     heading: string
     paragraphs: string[]
   }[]
-  code: {
-    title: string
-    fileName: string
-    source: string
-  }
+  code?: LessonCode
   review: {
     question: string
     answer: string

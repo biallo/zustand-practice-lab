@@ -1,41 +1,8 @@
 import type { Lesson } from './types'
 
-const vanillaCode = `import { create } from 'zustand'
-
-type SessionState = {
-  token: string | null
-  setToken: (token: string | null) => void
-  logout: () => void
-}
-
-export const useSessionStore = create<SessionState>()((set) => ({
-  token: null,
-  setToken: (token) => set({ token }),
-  logout: () => set({ token: null }),
-}))
-
-export async function authFetch(input: RequestInfo, init?: RequestInit) {
-  // React 组件外不能用 hook，但可以用 getState 读取当前快照。
-  const token = useSessionStore.getState().token
-
-  return fetch(input, {
-    ...init,
-    headers: {
-      ...init?.headers,
-      Authorization: token ? 'Bearer ' + token : '',
-    },
-  })
-}
-
-useSessionStore.subscribe((state, previousState) => {
-  if (state.token === null && previousState.token !== null) {
-    console.info('session cleared')
-  }
-})`
-
 export const vanillaLesson: Lesson = {
   id: 'vanilla',
-  number: '06',
+  number: '08',
   title: 'React 外访问 Store',
   summary: '掌握 getState、setState 和 subscribe 的非组件用法。',
   level: '进阶',
@@ -62,11 +29,6 @@ export const vanillaLesson: Lesson = {
       ],
     },
   ],
-  code: {
-    title: '在请求工具中读取 Session',
-    fileName: 'src/stores/session.ts',
-    source: vanillaCode,
-  },
   review: [
     {
       question: 'getState 会让 React 组件重新渲染吗？',

@@ -1,37 +1,5 @@
 import type { Lesson } from './types'
 
-const selectorCode = `import { create } from 'zustand'
-
-type ProfileState = {
-  name: string
-  email: string
-  theme: 'light' | 'dark'
-  setName: (name: string) => void
-  toggleTheme: () => void
-}
-
-export const useProfileStore = create<ProfileState>()((set) => ({
-  name: 'Ada',
-  email: 'ada@example.com',
-  theme: 'light',
-  setName: (name) => set({ name }),
-  toggleTheme: () =>
-    set((state) => ({ theme: state.theme === 'light' ? 'dark' : 'light' })),
-}))
-
-export function ProfileName() {
-  // 只订阅 name，theme 或 email 改变时这个组件不会因为无关字段重渲染。
-  const name = useProfileStore((state) => state.name)
-  return <strong>{name}</strong>
-}
-
-export function ThemeButton() {
-  const theme = useProfileStore((state) => state.theme)
-  const toggleTheme = useProfileStore((state) => state.toggleTheme)
-
-  return <button onClick={toggleTheme}>Theme: {theme}</button>
-}`
-
 export const selectorsLesson: Lesson = {
   id: 'selectors',
   number: '02',
@@ -61,11 +29,6 @@ export const selectorsLesson: Lesson = {
       ],
     },
   ],
-  code: {
-    title: '用 Selector 缩小组件订阅范围',
-    fileName: 'src/stores/useProfileStore.ts',
-    source: selectorCode,
-  },
   review: [
     {
       question: '为什么不建议组件直接读取整个 store？',

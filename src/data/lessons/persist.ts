@@ -1,41 +1,8 @@
 import type { Lesson } from './types'
 
-const persistCode = `import { create } from 'zustand'
-import { persist } from 'zustand/middleware'
-
-type SettingsState = {
-  theme: 'light' | 'dark'
-  fontSize: number
-  draftText: string
-  setTheme: (theme: SettingsState['theme']) => void
-  setFontSize: (fontSize: number) => void
-  setDraftText: (draftText: string) => void
-}
-
-export const useSettingsStore = create<SettingsState>()(
-  persist(
-    (set) => ({
-      theme: 'light',
-      fontSize: 16,
-      draftText: '',
-      setTheme: (theme) => set({ theme }),
-      setFontSize: (fontSize) => set({ fontSize }),
-      setDraftText: (draftText) => set({ draftText }),
-    }),
-    {
-      name: 'app-settings',
-      // 只持久化长期偏好，避免把临时草稿也写进本地存储。
-      partialize: (state) => ({
-        theme: state.theme,
-        fontSize: state.fontSize,
-      }),
-    },
-  ),
-)`
-
 export const persistLesson: Lesson = {
   id: 'persist',
-  number: '04',
+  number: '05',
   title: 'Persist 中间件',
   summary: '把学习进度、偏好设置等状态保存到本地存储。',
   level: '入门',
@@ -57,16 +24,11 @@ export const persistLesson: Lesson = {
     {
       heading: 'partialize 控制持久化范围',
       paragraphs: [
-        '不是 store 里的所有字段都应该落盘。partialize 可以挑选需要保存的字段，让持久化数据更小、更干净。',
+        '不是 store 里的所有字段都应该持久化。partialize 可以挑选需要保存的字段，让持久化数据更小、更干净。',
         '示例里 draftText 是临时草稿，没有被持久化。这样刷新后偏好仍在，但临时内容不会意外保留。',
       ],
     },
   ],
-  code: {
-    title: '只持久化长期偏好',
-    fileName: 'src/stores/useSettingsStore.ts',
-    source: persistCode,
-  },
   review: [
     {
       question: 'persist 的 name 为什么必须稳定？',
