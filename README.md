@@ -6,9 +6,21 @@
 
 [https://biallo.github.io/zustand-practice-lab/](https://biallo.github.io/zustand-practice-lab/)
 
-## 运行
+## 开发
 
 ```bash
 npm install
 npm run dev
+```
+
+## 编译和构建
+
+```shell
+npm run build
+```
+
+## 代码检查
+
+```shell
+npm run lint
 ```
