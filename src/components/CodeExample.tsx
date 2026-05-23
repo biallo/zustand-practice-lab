@@ -26,7 +26,10 @@ export function CodeExample({ code }: CodeExampleProps) {
             lineHeight: 1.7,
           }}
           codeTagProps={{
-            style: { fontFamily: 'var(--mono)' },
+            style: { 
+              fontFamily: 'var(--mono)',
+              whiteSpace: 'pre-wrap',
+             },
           }}
         >
           {code.snippet}
