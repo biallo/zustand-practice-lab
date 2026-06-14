@@ -109,11 +109,11 @@ export function CourseSidebar({
               <span className={styles.lessonNumber}>{lesson.number}</span>
               <span>
                 <strong>{lesson.title}</strong>
-                <span className={styles.lessonMeta}>
-                  <span>{lesson.level}</span>
-                  {done ? <span className={styles.completed}>已完成</span> : null}
+                <span className={styles.lessonLevel}>
+                  {lesson.level}
                 </span>
               </span>
+              {done ? <span className={styles.completed}>✓</span> : null}
             </button>
           )
         })}
